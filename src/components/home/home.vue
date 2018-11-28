@@ -25,7 +25,7 @@
               <i class="el-icon-menu"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item index="users">
               <i class="el-icon-location"></i>
               <span>用户列表</span>
             </el-menu-item>
@@ -86,6 +86,7 @@
       </el-aside>
     <!-- 主体部分 -->
       <el-main class="home_main">
+        <router-view class="inner_main"></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -132,10 +133,20 @@
   }
   .home_aside {
     background-color: #d3dce6;
-    /* height: 100%; */
+    height: 100%;
   }
   .home_main {
     background-color: #e9eef3;
     /* height: 100%; */
+  }
+  .inner_main {
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #fff;
+    height: 100%;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    border: 1px solid #ebeef5;
+    color: #303133;
+    border-radius: 4px;
   }
 </style>
