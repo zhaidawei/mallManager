@@ -1,12 +1,8 @@
 <template>
   <el-card>
   <!-- 面包屑 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item class="home">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
-  <!-- 搜索框 -->
+    <my-bread level1="用户管理" level2="用户列表"></my-bread>
+    <!-- 搜索框 -->
     <div style="margin-top: 15px;">
       <el-input 
       @clear="loadUserList"
@@ -18,34 +14,12 @@
       <el-button type="success" plain @click="showAddUserDia">添加用户</el-button>
     </div>
     <!-- 表格 -->
-     <el-table
-     height="300"
-      :data="userList"
-      style="width: 100%">
-      <el-table-column
-        type="index"
-        label="#"
-        width="30">
-      </el-table-column>
-      <el-table-column
-        prop="username"
-        label="姓名"
-        width="100">
-      </el-table-column>
-      <el-table-column
-        prop="email"
-        label="邮箱"
-        width="150">
-      </el-table-column>
-      <el-table-column
-        prop="mobile"
-        label="电话"
-        width="150">
-      </el-table-column>
-      <el-table-column
-        prop="create_time"
-        label="创建日期"
-        width="180">
+     <el-table height="300" :data="userList" style="width: 100%">
+      <el-table-column type="index" label="#" width="30"></el-table-column>
+      <el-table-column prop="username" label="姓名" width="100"></el-table-column>
+      <el-table-column prop="email" label="邮箱" width="150"></el-table-column>
+      <el-table-column prop="mobile" label="电话" width="150"></el-table-column>
+      <el-table-column prop="create_time" label="创建日期" width="180">
         <template slot-scope="scope">
           {{scope.row.create_time | fmtdate}}
         </template>
@@ -104,7 +78,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
         <el-button type="primary" @click="addUser()">确 定</el-button>
       </div>
     </el-dialog>
@@ -122,7 +96,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
         <el-button type="primary" @click="editUser()">确 定</el-button>
       </div>
     </el-dialog>
@@ -182,8 +156,7 @@
     methods: {
       //获取用户列表
       async getData() {
-        const AUTH_TOKEN = localStorage.getItem('token')
-        this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
+
         const res = await this.$http.get(
           `users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`,this.userList)
         // console.log(res)

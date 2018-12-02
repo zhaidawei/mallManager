@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import MyHttpServer from '@/plugins/http.js'
+import MyBread from '@/components/cuscom/myBread.vue'
 import moment from 'moment'
 
 import 'element-ui/lib/theme-chalk/index.css'
@@ -18,6 +19,8 @@ Vue.use(MyHttpServer)
 Vue.filter('fmtdate', (v) => {
   return moment(v).format('YYYY-MM-DD')
 })
+
+Vue.component(MyBread.name, MyBread)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
